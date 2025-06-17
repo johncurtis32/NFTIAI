@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .grow-underline {
+    animation: growUnderline 1.5s ease-in-out forwards;
+  }
+
+  .scanline {
+    animation: scanlineAnim 4s linear infinite;
+  }
+
+  @keyframes growUnderline {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+
+  @keyframes scanlineAnim {
+    0% {
+      transform: translateY(-100vh);
+    }
+    100% {
+      transform: translateY(100vh);
+    }
+  }
+
+  /* Mobile input fixes */
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+}
+
+@media (max-width: 768px) {
+  .scanline {
+    display: none;
+  }
+
+  /* Reduce particle effects on mobile for performance */
+  canvas {
+    opacity: 0.1 !important;
+  }
+
+  /* Ensure text is readable on small screens */
+  .text-xs {
+    font-size: 0.75rem;
+  }
+
+  /* Improve touch targets */
+  button,
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Mobile input specific fixes */
+  input[type="text"] {
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    transform: translateZ(0); /* Forces hardware acceleration */
+  }
+
+  /* Fix for mobile keyboard issues */
+  input:focus {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  /* Prevent zoom on input focus */
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Improve clip-path on mobile */
+@media (max-width: 640px) {
+  [style*="clipPath"],
+  [style*="clip-path"] {
+    clip-path: none !important;
+  }
+}
+
+/* Fix for iOS Safari input issues */
+@supports (-webkit-touch-callout: none) {
+  input[type="text"] {
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+  }
+}
